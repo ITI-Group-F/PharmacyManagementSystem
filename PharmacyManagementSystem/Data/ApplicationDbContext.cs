@@ -6,7 +6,6 @@ namespace PharmacyManagementSystem.Data
 {
 	public class ApplicationDbContext : IdentityDbContext
 	{
-		public virtual DbSet<User> Users { get; set; }
 		public virtual DbSet<Item> Items { get; set; }
 		public virtual DbSet<Invoice> Invoices { get; set; }
 		public virtual DbSet<InvoiceItems> InvoiceItems { get; set; }
