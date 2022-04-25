@@ -109,3 +109,11 @@ ul {
 .form-group {
     margin-top: 40px;
 }
+
+.dashboardicon {
+    height: 50vh;
+}
+
+    .dashboardicon:hover {
+        height: 60vh;
+    }
