@@ -10,7 +10,7 @@ namespace PharmacyManagementSystem.Data
 		public virtual DbSet<Invoice> Invoices { get; set; }
 		public virtual DbSet<InvoiceItems> InvoiceItems { get; set; }
 
-
+		public virtual DbSet<user> Users { get; set; }
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 				: base(options)
 		{
