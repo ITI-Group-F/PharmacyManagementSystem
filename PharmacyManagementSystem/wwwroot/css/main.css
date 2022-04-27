@@ -47,6 +47,7 @@ header {
 
 .item {
     width: 200px;
+    height:500px;
     /* height: 280px; */
     background: wheat;
     display: flex;
