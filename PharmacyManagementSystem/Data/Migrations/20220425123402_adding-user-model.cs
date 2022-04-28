@@ -27,6 +27,9 @@ namespace PharmacyManagementSystem.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Users");
+
+            
+
         }
     }
 }

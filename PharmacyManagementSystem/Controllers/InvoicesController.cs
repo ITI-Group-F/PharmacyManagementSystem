@@ -16,7 +16,8 @@ namespace PharmacyManagementSystem.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var result = _context.Invoices.ToList();
+            return View(result);
         }
 
         // GET: InvoiceController/Details/5
@@ -40,7 +41,7 @@ namespace PharmacyManagementSystem.Controllers
 
 
 
-                                    //get invoices by customer name
+         //get invoices by customer name
         public ActionResult GetInvoicesByCustomerName(string name)
         {
             if (name == null)

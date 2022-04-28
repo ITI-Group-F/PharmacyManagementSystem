@@ -1,0 +1,52 @@
+﻿@model IEnumerable<PharmacyManagementSystem.Models.Invoice>
+
+@{
+    ViewData["Title"] = "Invoices list";
+}
+
+
+<table class="table">
+    <p>
+    <a class="btn btn-info m-5" asp-action="Create">Create New</a>
+    </p>
+    <thead class="">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBuy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountPaied)
+            </th>
+            <th>Controlls</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBuy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountPaied)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
