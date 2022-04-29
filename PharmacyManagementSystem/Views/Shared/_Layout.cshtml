@@ -10,25 +10,6 @@
     <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
 </head>
 <body>
-    @*************NAVBAR********@ 
-    <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/Home">Pharmacy</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="/Home">Home</a></li>
-        <li><a href="/items">Items</a></li>
-        <li><a href="/Dashboard">Dashboard</a></li>
-        <li><a href="/invoice">Invoices</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul>
-    </div>
-  </nav>
-  @****************************@
-
     <div id="wlecome">@ViewData["Title"]</div>
     <div id="stock">
 
@@ -51,10 +32,5 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-
-
-
-
-
 </body>
 </html>
