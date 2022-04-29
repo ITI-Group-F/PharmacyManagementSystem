@@ -118,3 +118,9 @@ ul {
     .dashboardicon:hover {
         height: 60vh;
     }
+
+
+
+.navbar ul {
+    display: inline;
+}
