@@ -36,11 +36,11 @@ namespace PharmacyManagementSystem.Controllers
 			return View(user);
 		}
 
-		public async Task<IActionResult> Create([Bind("Id,UserName,Email,Password")] UserOpt model)
+		public async Task<IActionResult> Create([Bind("UserName, Email, Password")] UserOpt model)
 		{
 			if (ModelState.IsValid)
 			{
-				var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+				var user = new IdentityUser { Email = model.Email };
 				var result = await _userManager.CreateAsync(user, model.Password);
 				if (result.Succeeded)
 				{
