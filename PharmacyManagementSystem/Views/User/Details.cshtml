@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IdentityUser
+
+@{
+	ViewData["Title"] = "Details";
+}
+
+<dl class="row">
+	<h1>@Model.UserName</h1>
+	<h3>@Model.Email</h3>
+</dl>
+<div>
+	<a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+	<a class="btn btn-dark" asp-action="Index">Back to List</a>
+</div>
