@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace PharmacyManagementSystem.Controllers
 {
-    [Authorize("Admin")]
+    //[Authorize("Admin")]
     public class DashboardController : Controller
     {
         public IActionResult Index()

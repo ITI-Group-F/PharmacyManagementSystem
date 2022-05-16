@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PharmacyManagementSystem.ViewsModels
+@model List<IdentityUser>
+
+@{
+	ViewData["Title"] = "Users";
+}
+
+<div>
+	<div class="form-group">
+		<a class="btn btn-warning" asp-action="Create">Create New</a>
+	</div>
+	<div class="container">
+
+
+		@foreach (var item in Model)
+		{
+			<div class="item" id="@item.Id">
+				<div style=" height: 150px;">
+					<h2> @item.UserName</h2>
+					<br>
+					<span>Amount available: @item.Email</span>
+					<br>
+					<a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+					<a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a>
+					<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+				</div>
+			</div>
+		}
+	</div>
+</div>
