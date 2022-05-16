@@ -115,8 +115,6 @@ namespace PharmacyManagementSystem.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
-
-
 		private string HashPassword(string password)
 		{
 			byte[] salt;
