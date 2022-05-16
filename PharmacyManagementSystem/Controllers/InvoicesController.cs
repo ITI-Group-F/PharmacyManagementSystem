@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PharmacyManagementSystem.Data;
 using PharmacyManagementSystem.Models;
 
 namespace PharmacyManagementSystem.Controllers
 {
-    public class InvoiceController : Controller
+  [Authorize]
+  public class InvoiceController : Controller
     {
         private readonly ApplicationDbContext _context;
 
