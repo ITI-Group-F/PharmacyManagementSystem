@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using PharmacyManagementSystem.Data;
 
 namespace PharmacyManagementSystem.Areas.Identity.Pages.Account
 {
@@ -56,6 +57,7 @@ namespace PharmacyManagementSystem.Areas.Identity.Pages.Account
 
 		public async Task OnGetAsync(string? returnUrl = null)
 		{
+			SeedAdminUser();
 			if (!string.IsNullOrEmpty(ErrorMessage))
 			{
 				ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -106,5 +108,22 @@ namespace PharmacyManagementSystem.Areas.Identity.Pages.Account
 			// If we got this far, something failed, redisplay form
 			return Page();
 		}
+
+		public async Task SeedAdminUser()
+		{
+			var user = new IdentityUser
+			{
+				UserName = "admin@mail.com",
+				Email = "admin@mail.com",
+			};
+
+			var existing = await _userManager.FindByEmailAsync(user.Email);
+			if (existing is null)
+			{
+				var result = await _userManager.CreateAsync(user, "Pass#word5");
+				await _userManager.AddToRoleAsync(user, "Admin");
+			}
+		}
+
 	}
 }
