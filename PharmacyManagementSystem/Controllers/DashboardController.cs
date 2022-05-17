@@ -6,7 +6,7 @@ using PharmacyManagementSystem.Data;
 
 namespace PharmacyManagementSystem.Controllers
 {
-	[Authorize]
+	[Authorize("Admin")]
 	public class DashboardController : Controller
 	{
 		private readonly ApplicationDbContext _context;
