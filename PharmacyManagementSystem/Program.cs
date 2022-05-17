@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PharmacyManagementSystem.Data;
+using PharmacyManagementSystem.Data.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,10 +15,15 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
 		.AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ISeeding, Seeding>();
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
+using (var scope = app.Services.CreateScope())
+{
+	var seeder = scope.ServiceProvider.GetRequiredService<ISeeding>();
+	seeder.SeedAdminUser();
+}
 if (app.Environment.IsDevelopment())
 {
 	app.UseMigrationsEndPoint();
