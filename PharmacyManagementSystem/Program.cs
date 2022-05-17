@@ -20,11 +20,6 @@ builder.Services.AddScoped<ISeeding, Seeding>();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
-using (var scope = app.Services.CreateScope())
-{
-	var seeder = scope.ServiceProvider.GetRequiredService<ISeeding>();
-	seeder.SeedAdminUser();
-}
 if (app.Environment.IsDevelopment())
 {
 	app.UseMigrationsEndPoint();
@@ -48,5 +43,9 @@ app.MapControllerRoute(
 		name: "default",
 		pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
-
+using (var scope = app.Services.CreateScope())
+{
+	var seeder = scope.ServiceProvider.GetRequiredService<ISeeding>();
+	seeder.SeedAdminUser();
+}
 app.Run();

@@ -7,10 +7,12 @@ namespace PharmacyManagementSystem.Data
 	public class Seeding : ISeeding
 	{
 		private readonly ApplicationDbContext _context;
+		private readonly UserManager<IdentityUser> _userManager;
 
-		public Seeding(ApplicationDbContext context)
+		public Seeding(ApplicationDbContext context, UserManager<IdentityUser> userManager)
 		{
 			_context = context;
+			_userManager = userManager;
 		}
 
 		public async Task SeedAdminUser()
@@ -18,14 +20,20 @@ namespace PharmacyManagementSystem.Data
 			var user = new IdentityUser
 			{
 				UserName = "admin@mail.com",
-				NormalizedUserName = "admin@mail.com",
 				Email = "admin@mail.com",
-				NormalizedEmail = "admin@mail.com",
-				EmailConfirmed = false,
-				LockoutEnabled = false,
-				SecurityStamp = Guid.NewGuid().ToString()
 			};
+			try
+			{
+				var result = await _userManager.CreateAsync(user, "Pass#word5");
+				if (result.Succeeded)
+				{
+					await _userManager.AddToRoleAsync(user, "Admin");
+				}
+			}
+			catch (Exception ex)
+			{
 
+			}
 			var roleStore = new RoleStore<IdentityRole>(_context);
 
 			if (!_context.Roles.Any(r => r.Name == "Admin"))
@@ -39,9 +47,12 @@ namespace PharmacyManagementSystem.Data
 				var hashed = password.HashPassword(user, "Pass#word!");
 				user.PasswordHash = hashed;
 				var userStore = new UserStore<IdentityUser>(_context);
-				await userStore.CreateAsync(user);
-				await userStore.AddToRoleAsync(user, "User");
-				await userStore.AddToRoleAsync(user, "Admin");
+				var result = await userStore.CreateAsync(user);
+				if (result.Succeeded)
+				{
+					await userStore.AddToRoleAsync(user, "User");
+					await userStore.AddToRoleAsync(user, "Admin");
+				}
 			}
 
 			await _context.SaveChangesAsync();

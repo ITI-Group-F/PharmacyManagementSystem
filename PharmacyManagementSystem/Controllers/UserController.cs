@@ -63,11 +63,12 @@ namespace PharmacyManagementSystem.Controllers
 			{
 				return NotFound();
 			}
+			item.PasswordHash = String.Empty;
 			return View(item);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,Email,Password")] UserOpt model)
+		public async Task<IActionResult> Edit(string id, [Bind("Id,UserName,Email,PasswordHash")] IdentityUser model)
 		{
 			if (id != model.Id)
 			{
@@ -81,8 +82,8 @@ namespace PharmacyManagementSystem.Controllers
 					var user = await _userManager.FindByIdAsync(id);
 					user.UserName = model.UserName;
 					user.Email = model.Email;
-					user.PasswordHash = HashPassword(model.Password);
-					_userManager.UpdateAsync(user);
+					user.PasswordHash = HashPassword(model.PasswordHash);
+					await _userManager.UpdateAsync(user);
 				}
 				catch (DbUpdateConcurrencyException) { }
 				return RedirectToAction(nameof(Index));
@@ -111,7 +112,7 @@ namespace PharmacyManagementSystem.Controllers
 		public async Task<IActionResult> DeleteConfirmed(string id)
 		{
 			var user = await _userManager.FindByIdAsync(id);
-			_userManager.DeleteAsync(user);
+			await _userManager.DeleteAsync(user);
 			return RedirectToAction(nameof(Index));
 		}
 
